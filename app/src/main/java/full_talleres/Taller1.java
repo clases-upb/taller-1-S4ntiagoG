@@ -15,11 +15,12 @@
  */
 package full_talleres;
 
+
+
 public class Taller1 {
     
     public static void main(String[] args) {
-
-
+    
     }
 
     /* 
@@ -27,12 +28,44 @@ public class Taller1 {
      y la convierta a metros/seg y a metros/hora. Retorne un string del tipo: ### m/s - ### m/h. Si hay error, 
      devuelva el string "Error en la conversion"
     */
-    
+    public static String Convertir_km_seg(int km_s) {
+        
+        try {
+
+            
+            final short metros_en_km = 1000; //factores de conversion 
+            final short hora_seg = 3600;
+
+            double Metros_Seg = km_s*metros_en_km;
+            double Metros_Hor = Metros_Seg*hora_seg;
+
+            String convercion =  Metros_Seg + " m/s" + " - " + Metros_Hor + " m/h";
+
+            return convercion;
+
+            
+        } catch (Exception e) {
+            return "Error en la conversion";
+        }
+
+    }
     
 
     /*3. Diseñe un algoritmo e implemente la función Convertir_cm_lt que: reciba una cantidad double expresada en 
     cc (centímetros cúbicos) y devuelva un float con su equivalente en litros. Si hay algún error, retorne 0.
     */
+    public static float Convertir_cm_lt(double centimetros_cubicos){
+
+        try {
+            
+            final short litro_en_cc = 1000;
+            float litros = (float) centimetros_cubicos/litro_en_cc;
+            return litros;
+
+        } catch (Exception e) { 
+            return 0;
+        }
+    }
   
     
 
@@ -41,6 +74,21 @@ public class Taller1 {
    y devuelva su equivalente en pesos usando una TRM de $4170 pesos por cada dólar. La función recibe enteros
    y devuelve enteros, pueden ser grandes. Si hay algún error, retorne -1.
    */
+
+   public static int Convertir_us_cops (int Dolar){
+    
+    try {
+        
+        short TMR = 4170;
+        int convercion_COP = Dolar*TMR;
+        
+        return convercion_COP;
+    } 
+    
+    catch (Exception e) {
+        return -1;
+    }
+   }
    
     
   
@@ -49,6 +97,24 @@ public class Taller1 {
    centígrados y la devuelve en grados Fahrenheit (averiguar la fórmula) F = 32 + ( 9 * C / 5). Si hay algún error, 
    retorne 0.
    */
+  public static double Convertir_cent_far(int grados_C){
+    //marcamos bloque try catch
+    
+    try {
+        //constantes
+        final byte constan_1 = 32;
+        final byte constan_2 = 9;
+        final byte constan_3 = 5;
+        //operacion 
+        double grados_F = (constan_1 + (constan_2 * grados_C / constan_3));
+
+        return grados_F;
+
+    } 
+    catch (Exception e) {
+        return 0;
+    }
+  }
 
           
 
@@ -57,6 +123,33 @@ public class Taller1 {
    el número de minutos y número segundos como enteros bytes, positivos y devuelva todo en segundos en un entero. 
    Si hay algún error, devuelva -1.
    */
+  public static int Calcular_segs (short dias, short horas, short min, short seg){ /*al utlizar el byte, en las pruebas no funcionaba, entonces recurri al short, que es lo mas cercano al byte para mantener cierto nviel de optimisacion "si funciona con el short en las pruebas"*/
+    //marcamos bloque try catch
+    try {
+          // verificamos que los datos sean positivos
+
+            if (dias<0 || horas<0 || min<0 || seg < 0) {
+                return -1;
+            }
+            // definimos constantes
+            final byte dia_horas = 24;
+            final byte minuto_seg = 60;
+
+            //zona de operaciones
+            
+            int dias_Seg = (dias*dia_horas*minuto_seg* minuto_seg);
+            int horas_Seg = (horas*minuto_seg*minuto_seg);
+            int minutos_seg = (min*minuto_seg);
+            int segundos_totales = dias_Seg + horas_Seg + minuto_seg + seg;
+
+            return segundos_totales;
+
+        } 
+    catch (Exception e) 
+        {    
+        return -1;
+        }
+  }
 
    
 
@@ -66,6 +159,28 @@ public class Taller1 {
    en un string del tipo: "### kilos - ### toneladas". 
    Si hay algún error, devuelva en un string "Error en la función Calcular_peso_carga"*/
 
+   public static String Calcular_peso_carga (float cargado_camion_ton, float vacio_camion_ton){
+   //marcamos bloque try catch
+    try {
+        //definimos constan
+        final short tonelada_kilos = 1000;
+        
+        //zona de operaciones
+        float carga_en_ton = cargado_camion_ton - vacio_camion_ton;
+        float carga_en_kil = carga_en_ton * tonelada_kilos;
+        String carga = carga_en_kil + " kilos" + " - " + carga_en_ton + " toneladas";
+        
+        
+        return carga;
+
+        } 
+    
+    catch (Exception e) 
+        {
+        return "Error en la función Calcular_peso_carga";
+        }
+   }
+
    
 
    /*8.	Diseñe un algoritmo e implemente la función Calcular_horasxviaje que calcule y devuelva un float con las horas  
@@ -73,7 +188,19 @@ public class Taller1 {
    otro dato short que es la velocidad  promedio que alcanzará también el vehículo en kilómetros/hora.  
    Si hay algún error, devuelva -1.
    */
-
+   
+   public static float Calcular_horasxviaje(String lugar_destino, short km, short velocidad_promedio) {
+    
+    try {
+        
+        float Horas_necesarias = km / velocidad_promedio;
+        return Horas_necesarias;
+        } 
+    catch (Exception e) {
+        return -1;
+    }
+    
+   }
   
    
    /*9.	Un avión necesita cargar combustible para cubrir sus rutas programadas en el día. 
@@ -86,6 +213,29 @@ public class Taller1 {
    
    Si hay algún error, devuelva -1.*/
 
+   public static float Calcular_combustible (int Ruta_1, int Ruta_2, int Ruta_3, int Ruta_4){
+    //bloque try cathc
+    
+    try {
+        //definimos constantes y variables
+        
+        double a = 1.6; 
+        double km_vel_Cru = 60.8;
+        double ton_Comb = 0.2;
+        double Km_Total_R1 = (Ruta_1 / km_vel_Cru * ton_Comb + a);
+        double Km_Total_R2 = (Ruta_2 / km_vel_Cru * ton_Comb + a);
+        double Km_Total_R3 = (Ruta_3 / km_vel_Cru * ton_Comb + a);
+        double Km_Total_R4 = (Ruta_4 / km_vel_Cru * ton_Comb + a);
+        double combustible_total = (Km_Total_R1 + Km_Total_R2 + Km_Total_R3 + Km_Total_R4);
+
+
+        return (float) combustible_total;
+
+    } catch (Exception e) {
+        return -1;
+    }
+   }
+
    
    
    
@@ -96,7 +246,20 @@ public class Taller1 {
    
    Si hay algún error, devuelva 0.
    */
-   
-   
-   
+  public static double Calcular_peso_luna (byte peso_kilos){
+    
+    try {
+        
+        final double velocidad_gravedad = 9.81;
+        final double const_1 = 0.165;
+        double peso_tierra_new = peso_kilos * velocidad_gravedad;
+        double peso_luna_new = peso_tierra_new * const_1;
+
+        return peso_luna_new;
+
+        } 
+    catch (Exception e) {
+       return 0;
+    }
+}
 }
